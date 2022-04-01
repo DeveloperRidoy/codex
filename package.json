@@ -1,14 +1,17 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 5000",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "framer-motion": "^6.2.8",
     "next": "latest",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
+    "react-split": "^2.0.14"
   },
   "devDependencies": {
     "@types/node": "17.0.4",
