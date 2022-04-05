@@ -11,7 +11,7 @@ const generateOutput = (html: IHtml, css: ICss, js: IJs) => {
     // ignore empty href string
     if (href !== '' && href !== null) {
       // add styleSheet with href
-      styleSheets = styleSheets + `<link rel="stylesheet" href=${href}/>`
+      styleSheets = styleSheets + `<link rel="stylesheet" href=${href+ ' '}/>`
     }
   })
 
@@ -19,7 +19,7 @@ const generateOutput = (html: IHtml, css: ICss, js: IJs) => {
     // ignore empty src string
     if (src !== '' && src !== null) {
       // add styleSheet with src
-      styleSheets = styleSheets + `<script src=${src}></script>`
+      styleSheets = styleSheets + `<script src=${src + ' '}></script>`
     }
   })
 
