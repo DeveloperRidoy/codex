@@ -5,11 +5,13 @@ import { useGlobalContext } from './hoc/GlobalContext'
 
 const DownloadBtn = () => {
   const {
-    state: { codeBlocks },
+    state: {
+      codeBlocks: { html, css, js },
+    },
   } = useGlobalContext()
 
   const downloadCode = () => {
-    const text = generateOutput(codeBlocks)
+    const text = generateOutput(html, css, js)
     const blob = new Blob([text], { type: 'text/html' })
     const url = window.URL.createObjectURL(blob)
     const a = document.createElement('a')

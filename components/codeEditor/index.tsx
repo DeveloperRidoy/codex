@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react'
-import { EDeviceType } from '../../types'
+import { EDeviceType } from '../../utils/types'
 import { useGlobalContext } from '../hoc/GlobalContext'
 import CodeEditorMobile from './mobile'
 import CodeEditorPc from './pc'

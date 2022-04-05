@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 /* gutter css for resizable sections */
 .gutter {
   background-repeat: no-repeat;

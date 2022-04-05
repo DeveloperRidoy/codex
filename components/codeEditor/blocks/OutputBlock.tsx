@@ -12,12 +12,14 @@ const OutpuIBlock: FC = () => {
   // update output when any of the codeblocks input has been updated
   useEffect(() => {
     if (ref.current) {
+      
       ref.current.srcdoc = generateOutput(html, css, js)
     }
   }, [html, css, js])
 
+
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full bg-white">
       <iframe
         loading="lazy"
         allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share"

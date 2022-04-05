@@ -4,14 +4,16 @@ import { useGlobalContext } from '../hoc/GlobalContext'
 import { motion } from 'framer-motion'
 import { FaTimes } from 'react-icons/fa'
 import MenuList from './MenuList'
-import { EBlock } from '../../types'
+import { EBlock } from '../../utils/types'
 import HtmlSettings from './HtmlSettings'
 import CssSettings from './CssSettings'
 import JsSettings from './JsSettings'
+import Spinner from '../Spinner'
 
 const SettingsModal = () => {
   const {
     state: {
+      loading,
       settingsModal: { show, activeBlock },
     },
     setState,
@@ -30,21 +32,27 @@ const SettingsModal = () => {
         animate={{ scale: 1, opacity: 1, x: '-50%', y: '-50%' }}
         exit={{ scale: 0.8, opacity: 0 }}
         transition={{ duration: 0.1 }}
-        className="fixed top-1/2 left-1/2 z-20 flex  h-[calc(100vh-50px) w-[calc(100vw-30px)] flex-col overflow-hidden rounded border-2 border-gray-700 bg-gray-900 text-s md:h-[calc(100vh-100px)] md:w-[600px]"
+        className="h-[calc(100vh-50px)] text-s fixed top-1/2 left-1/2  z-20 flex w-[calc(100vw-30px)] flex-col justify-between overflow-hidden rounded border-2 border-gray-700 bg-gray-900 md:h-[calc(100vh-100px)] md:w-[600px]" 
       >
         <Header closeModal={closeModal} />
-        <div className="flex flex-col md:flex-row flex-1 gap-5 overflow-auto p-3 md:p-0">
-          <MenuList />
-          <div className="w-full overflow-auto pb-10">
-            {activeBlock === EBlock.HTML ? (
-              <HtmlSettings />
-            ) : activeBlock === EBlock.CSS ? (
-              <CssSettings />
-            ) : (
-              activeBlock === EBlock.JS && <JsSettings />
-            )}
+        {loading ? (
+          <div className="mx-auto">
+            <Spinner size={30} />
           </div>
-        </div>
+        ) : (
+          <div className="flex flex-1 flex-col gap-5 overflow-auto p-3 md:flex-row md:p-0">
+            <MenuList />
+            <div className="w-full overflow-auto pb-10">
+              {activeBlock === EBlock.HTML ? (
+                <HtmlSettings />
+              ) : activeBlock === EBlock.CSS ? (
+                <CssSettings />
+              ) : (
+                activeBlock === EBlock.JS && <JsSettings />
+              )}
+            </div>
+          </div>
+        )}
         <Footer closeModal={closeModal} />
       </motion.div>
     </CaptureExit>

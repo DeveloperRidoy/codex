@@ -1,5 +1,5 @@
 import React, { Dispatch, FC, SetStateAction, useState } from 'react'
-import { IBlock, ICodeBlock } from '../../../types'
+import { IBlock, ICodeBlock } from '../../../utils/types'
 import { useGlobalContext } from '../../hoc/GlobalContext'
 import InpuIBlock from '../blocks/codeBlock/InputBlock'
 import OutpuIBlock from '../blocks/OutputBlock'

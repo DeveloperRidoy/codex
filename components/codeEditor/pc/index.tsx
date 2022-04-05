@@ -1,5 +1,5 @@
 import React from 'react'
-import { ELayout } from '../../../types'
+import { ELayout } from '../../../utils/types'
 import { useGlobalContext } from '../../hoc/GlobalContext'
 import EditorCol from './layouts/EditorCol'
 import EditorRow from './layouts/EditorRow'

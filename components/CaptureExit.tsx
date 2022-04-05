@@ -21,7 +21,7 @@ const Child: FC<{ exit: () => void }> = ({ children, exit }) => {
   const ref = useRef<HTMLDivElement>(null)
 
   const mouseHandler = (e: MouseEvent) => {
-    const clickedOutside = !ref.current?.contains(e.target as Node)
+    const clickedOutside = !ref.current?.contains(e.target as HTMLElement)
     if (clickedOutside) exit()
   }
 

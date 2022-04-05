@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import Split from 'react-split'
-import { TInputSizes } from '../../../../types'
+import { TInputSizes } from '../../../../utils/types'
 import { useGlobalContext } from '../../../hoc/GlobalContext'
 import CodeBlock from '../../blocks/codeBlock'
 import OutpuBlock from '../../blocks/OutputBlock'

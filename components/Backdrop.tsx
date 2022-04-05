@@ -5,14 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 const Backdrop = () => {
   const {
     state: { settingsModal },
-    setState,
   } = useGlobalContext()
-
-  const closeModal = () =>
-    setState((state) => ({
-      ...state,
-      settingsModal: { ...state.settingsModal, show: false },
-    }))
 
   return (
     <AnimatePresence>
@@ -23,9 +16,7 @@ const Backdrop = () => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.1 }}
           className="absolute inset-0 z-10 bg-black/70"
-        >
-         
-        </motion.div>
+        ></motion.div>
       )}
     </AnimatePresence>
   )

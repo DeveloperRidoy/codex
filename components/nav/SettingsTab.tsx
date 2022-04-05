@@ -8,6 +8,7 @@ const SettingsTab = () => {
   return (
     <div>
       <button
+        title="Settings"
         className="group flex h-9 items-center gap-1 rounded bg-gray-700 px-4 transition hover:bg-gray-600 active:scale-95"
         onClick={() =>
           setState((state) => ({
@@ -16,10 +17,10 @@ const SettingsTab = () => {
           }))
         }
       >
-        <div className="text-xl transition group-hover:rotate-45">
+        <div className="text-xl transition group-hover:rotate-45 -mt-1">
           <IoMdSettings />
         </div>
-        <span className="-mt-1 hidden md:block">settings</span>
+        <span className="-mt-1 hidden md:block capitalize">settings</span>
       </button>
     </div>
   )

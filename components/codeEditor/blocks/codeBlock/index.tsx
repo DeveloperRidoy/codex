@@ -1,10 +1,11 @@
 import React, { FC, KeyboardEventHandler, useEffect, useState } from 'react'
-import { EBlock, IBlock, ICodeBlock } from '../../../../types'
+import { EBlock, IBlock, ICodeBlock } from '../../../../utils/types'
 import { useGlobalContext } from '../../../hoc/GlobalContext'
 import { FaSlash, FaStarOfLife } from 'react-icons/fa'
 import { RiParenthesesLine } from 'react-icons/ri'
 import { IoMdSettings } from 'react-icons/io'
-import InpuIBlock from './InputBlock'
+import InputBlock from './InputBlock'
+import Spinner from '../../../Spinner'
 
 const CodeBlock: FC<{ block: ICodeBlock }> = ({ block }) => {
   const {
@@ -17,7 +18,7 @@ const CodeBlock: FC<{ block: ICodeBlock }> = ({ block }) => {
     >
       <HeaderSection block={block} />
       <div className="absolute inset-0 top-9 bg-gray-800 p-3">
-        {!loading && <InpuIBlock block={block} />}
+        {!loading && <InputBlock block={block} />}
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { FaArrowUp } from 'react-icons/fa'
-import { EBlock, IHtml } from '../../types'
+import { EBlock, IHtml } from '../../utils/types'
 import debounce from '../../utils/debounce'
 import { useGlobalContext } from '../hoc/GlobalContext'
 
@@ -71,7 +71,7 @@ const HtmlSettings = () => {
         <textarea
           rows={5}
           className="rounded bg-gray-100 p-2 text-black"
-          placeholder="e.g. <meta>, <link>, <script> "
+          placeholder="e.g. <title>, <meta>, <link>, <script> "
           value={headText}
           onChange={(e) => setHeadText((e.target as HTMLTextAreaElement).value)}
         />

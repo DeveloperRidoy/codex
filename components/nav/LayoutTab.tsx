@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useGlobalContext } from '../hoc/GlobalContext'
-import { ELayout } from '../../types'
+import { ELayout } from '../../utils/types'
 import CaptureExit from '../CaptureExit'
 
 const LayoutTab = () => {

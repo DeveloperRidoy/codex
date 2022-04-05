@@ -1,5 +1,5 @@
 import { FC, KeyboardEventHandler, useEffect, useState } from 'react'
-import { EBlock, ICodeBlock, ICss, IHtml, IJs } from '../../../../types'
+import { EBlock, ICodeBlock, ICss, IHtml, IJs } from '../../../../utils/types'
 import debounce from '../../../../utils/debounce'
 import { useGlobalContext } from '../../../hoc/GlobalContext'
 
@@ -48,7 +48,7 @@ const InputBlock: FC<{ block: ICodeBlock }> = ({ block }) => {
 
     if (block.code === inputState.block.code) return
 
-    debounce(() => inputHandler(), 500)
+    debounce(inputHandler, 500)
   }, [inputState.block.code])
 
   // update currenIBlock on block change
@@ -64,8 +64,6 @@ const InputBlock: FC<{ block: ICodeBlock }> = ({ block }) => {
 
   const indentHandler: KeyboardEventHandler = (e) => {
     // text indent on tab
-    console.log(e)
-
     if (e.key === 'Tab') {
       e.preventDefault()
       const target = e.target as HTMLTextAreaElement

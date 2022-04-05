@@ -9,7 +9,7 @@ import {
   IHtml,
   ICss,
   IJs,
-} from '../../types'
+} from '../../utils/types'
 
 const Context = createContext<IContext>({
   state: {} as TState,
@@ -28,18 +28,18 @@ const GlobalContext: FC<{ deviceType: EDeviceType }> = ({
     inputSizes: [100 / 3, 100 / 3, 100 / 3],
     inputOutputSizes: [50, 50],
     codeBlocks: {
-      html:{
+      html: {
         name: EBlock.HTML,
         code: '',
         htmlTagClassText: '',
         headTagText: '',
       },
-      css:{
+      css: {
         name: EBlock.CSS,
         code: '',
-        styleTags: [],
+        styleSheets: [],
       },
-      js:{
+      js: {
         name: EBlock.JS,
         code: '',
         scriptTags: [],
@@ -57,21 +57,21 @@ const GlobalContext: FC<{ deviceType: EDeviceType }> = ({
 
   // get initial data from localStorage
   useEffect(() => {
-    let html: IHtml; 
-    let css: ICss;
-    let js :IJs;
+    let html = state.codeBlocks.html
+    let css = state.codeBlocks.css 
+    let js = state.codeBlocks.js
 
-    const htmlJson = localStorage.getItem(EBlock.HTML);
-    const cssJson = localStorage.getItem(EBlock.CSS);
-    const jsJson = localStorage.getItem(EBlock.JS);
+    const htmlJson = localStorage.getItem(EBlock.HTML)
+    const cssJson = localStorage.getItem(EBlock.CSS)
+    const jsJson = localStorage.getItem(EBlock.JS)
 
-    if (htmlJson) html = JSON.parse(htmlJson);
-    if (cssJson) css = JSON.parse(cssJson);
-    if (jsJson) js = JSON.parse(jsJson);
-    
+    if (htmlJson) html = JSON.parse(htmlJson)
+    if (cssJson) css = JSON.parse(cssJson)
+    if (jsJson) js = JSON.parse(jsJson)
+
     setState((state) => ({
       ...state,
-      codeBlocks: {html, css, js},
+      codeBlocks: { html, css, js },
       loading: false,
     }))
   }, [])
