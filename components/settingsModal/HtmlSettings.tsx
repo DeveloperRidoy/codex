@@ -42,7 +42,7 @@ const HtmlSettings = () => {
 
   const insertCommonTagsToHead = () => {
     const text =
-      '<meta name="viewport" content="width=device-width, initial-scale=1">'
+      '\n<meta name="viewport" content="width=device-width, initial-scale=1">'
     setHeadText(prevText => prevText + text);
   }
 
