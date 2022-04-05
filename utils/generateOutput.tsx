@@ -4,10 +4,10 @@ import { ICss, IHtml, IJs } from './types'
  * @returns string containing the html body
  */
 const generateOutput = (html: IHtml, css: ICss, js: IJs) => {
-  let styleSheets: string = ""
-  let scriptTags: string = '';
-  
-  css.styleSheets.forEach(href => {
+  let styleSheets: string = ''
+  let scriptTags: string = ''
+
+  css.styleSheets.forEach((href) => {
     // ignore empty href string
     if (href !== '' && href !== null) {
       // add styleSheet with href
@@ -29,10 +29,10 @@ const generateOutput = (html: IHtml, css: ICss, js: IJs) => {
           <head>
             ${html.headTagText}
             ${styleSheets}
-            <style>${css.code ?? ''}</style>
+            <style>${css.code}</style>
           </head>
           <body>
-            ${html.code ?? ''}
+            ${html.code}
             ${scriptTags}
             <script>${js.code}</script>
           </body>

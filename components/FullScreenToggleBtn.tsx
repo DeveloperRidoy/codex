@@ -24,7 +24,7 @@ const FullScreenToggleBtn = () => {
 
   return (
     <button
-      title={isFullScreen ? 'minimize' : 'maximize'}
+      title={isFullScreen ? 'Minimize' : 'Maximize'}
       className="text-xl text-gray-400 transition hover:scale-125 hover:text-white"
       onClick={toggleScreen}
     >

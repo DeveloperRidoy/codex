@@ -1,4 +1,10 @@
-import { FC, KeyboardEventHandler, useEffect, useState } from 'react'
+import {
+  ChangeEvent,
+  FC,
+  KeyboardEventHandler,
+  useEffect,
+  useState,
+} from 'react'
 import { EBlock, ICodeBlock, ICss, IHtml, IJs } from '../../../../utils/types'
 import debounce from '../../../../utils/debounce'
 import { useGlobalContext } from '../../../hoc/GlobalContext'
@@ -11,28 +17,28 @@ const InputBlock: FC<{ block: ICodeBlock }> = ({ block }) => {
 
   const [inputState, setInputState] = useState<{
     firstRender: boolean
-    block: ICodeBlock
-  }>({ firstRender: true, block })
+    blockName: EBlock
+    code: string
+  }>({ firstRender: true, blockName: block.name, code: block.code })
 
   // input handler
   const inputHandler = () => {
+    const updatedBlock = { ...block, code: inputState.code } as ICodeBlock
     // save to localStorage
-    localStorage.setItem(block.name, JSON.stringify(inputState.block))
+    localStorage.setItem(block.name, JSON.stringify(updatedBlock))
 
     const html =
-      inputState.block.name === EBlock.HTML
-        ? (inputState.block as IHtml)
+      inputState.blockName === EBlock.HTML
+        ? (updatedBlock as IHtml)
         : codeBlocks.html
     const css =
-      inputState.block.name === EBlock.CSS
-        ? (inputState.block as ICss)
+      inputState.blockName === EBlock.CSS
+        ? (updatedBlock as ICss)
         : codeBlocks.css
     const js =
-      inputState.block.name === EBlock.JS
-        ? (inputState.block as IJs)
-        : codeBlocks.js
-    
-        // update state
+      inputState.blockName === EBlock.JS ? (updatedBlock as IJs) : codeBlocks.js
+
+    // update state
     setState((state) => ({
       ...state,
       codeBlocks: { html, css, js },
@@ -46,24 +52,22 @@ const InputBlock: FC<{ block: ICodeBlock }> = ({ block }) => {
       return
     }
 
-    if (block.code === inputState.block.code) return
+    if (block.code === inputState.code) return
 
     debounce(inputHandler, 500)
-  }, [inputState.block.code])
+  }, [inputState.code])
 
   // update currenIBlock on block change
   useEffect(() => {
-    if (inputState.firstRender) {
-      setInputState({ ...inputState, firstRender: false })
-      return
-    }
+    if (inputState.firstRender)
+      return setInputState({ ...inputState, firstRender: false })
 
-    if (inputState.block.name === block.name) return
-    setInputState({ ...inputState, block })
+    if (inputState.blockName === block.name) return
+    setInputState({ ...inputState, blockName: block.name, code: block.code })
   }, [block.name])
 
+  // text indent on tab
   const indentHandler: KeyboardEventHandler = (e) => {
-    // text indent on tab
     if (e.key === 'Tab') {
       e.preventDefault()
       const target = e.target as HTMLTextAreaElement
@@ -75,20 +79,19 @@ const InputBlock: FC<{ block: ICodeBlock }> = ({ block }) => {
     }
   }
 
+  const inputCode = (e: ChangeEvent) => {
+    setInputState((state) => ({
+      ...state,
+      code: (e.target as HTMLTextAreaElement).value,
+    }))
+  }
+
   return (
     <textarea
-      value={inputState.block.code}
+      value={inputState.code}
       className="h-full w-full resize-none bg-gray-800 text-base text-gray-200 outline-none"
       spellCheck={false}
-      onInput={(e) => {
-        setInputState((state) => ({
-          ...state,
-          block: {
-            ...state.block,
-            code: (e.target as HTMLTextAreaElement).value,
-          },
-        }))
-      }}
+      onChange={inputCode}
       onKeyDown={indentHandler}
     ></textarea>
   )
