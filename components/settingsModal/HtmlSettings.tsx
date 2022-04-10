@@ -17,8 +17,8 @@ const HtmlSettings = () => {
   const [headText, setHeadText] = useState(html.headTagText)
 
   const addClassToHtml = () => {
-    const updatedHtml = { ...html, htmlTagClassText: htmlClass } as IHtml;
-    localStorage.setItem(EBlock.HTML, JSON.stringify(updatedHtml));
+    const updatedHtml = { ...html, htmlTagClassText: htmlClass } as IHtml
+    localStorage.setItem(EBlock.HTML, JSON.stringify(updatedHtml))
     setState((state) => ({
       ...state,
       codeBlocks: {
@@ -29,7 +29,7 @@ const HtmlSettings = () => {
   }
 
   const addTextToHead = () => {
-    const updatedHtml = { ...html, headTagText: headText } as IHtml;
+    const updatedHtml = { ...html, headTagText: headText } as IHtml
     localStorage.setItem(EBlock.HTML, JSON.stringify(updatedHtml))
     setState((state) => ({
       ...state,
@@ -43,7 +43,7 @@ const HtmlSettings = () => {
   const insertCommonTagsToHead = () => {
     const text =
       '\n<meta name="viewport" content="width=device-width, initial-scale=1">'
-    setHeadText(prevText => prevText + text);
+    setHeadText((prevText) => prevText + text)
   }
 
   useEffect(() => {
