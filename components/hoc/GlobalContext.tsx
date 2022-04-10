@@ -1,4 +1,11 @@
-import { createContext, FC, useContext, useEffect, useState } from 'react'
+import {
+  ChangeEvent,
+  createContext,
+  FC,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import {
   EBlock,
   ELayout,
@@ -25,6 +32,7 @@ const GlobalContext: FC<{ deviceType: EDeviceType }> = ({
   const initialState: TState = {
     deviceType,
     layout: ELayout.COL,
+    darkMode: false,
     inputSizes: [100 / 3, 100 / 3, 100 / 3],
     inputOutputSizes: [50, 50],
     codeBlocks: {
@@ -55,10 +63,10 @@ const GlobalContext: FC<{ deviceType: EDeviceType }> = ({
   }
   const [state, setState] = useState(initialState)
 
-  // get initial data from localStorage
   useEffect(() => {
+    // get initial data from localStorage
     let html = state.codeBlocks.html
-    let css = state.codeBlocks.css 
+    let css = state.codeBlocks.css
     let js = state.codeBlocks.js
 
     const htmlJson = localStorage.getItem(EBlock.HTML)
@@ -69,11 +77,29 @@ const GlobalContext: FC<{ deviceType: EDeviceType }> = ({
     if (cssJson) css = JSON.parse(cssJson)
     if (jsJson) js = JSON.parse(jsJson)
 
+    // listen for color scheme change
+    const colorSchemeListener = (e: MediaQueryListEvent) => {
+      setState((state) => ({ ...state, darkMode: e.matches }))
+    }
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', colorSchemeListener)
+
+    const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    // update state
     setState((state) => ({
       ...state,
+      darkMode,
       codeBlocks: { html, css, js },
       loading: false,
     }))
+
+    // cleanup
+    return () => {
+      window
+        .matchMedia('(prefers-color-scheme: dark)')
+        .removeEventListener('change', colorSchemeListener)
+    }
   }, [])
 
   return (

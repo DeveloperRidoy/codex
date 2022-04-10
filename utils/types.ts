@@ -49,6 +49,7 @@ export enum EDeviceType {
 export type TState = {
   deviceType: EDeviceType
   layout: ELayout
+  darkMode: boolean
   inputSizes: TInputSizes
   inputOutputSizes: TInputOutputSizes
   codeBlocks: {
