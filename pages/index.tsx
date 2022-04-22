@@ -7,7 +7,7 @@ import getDeviceType from '../utils/getDeviceType'
 const Home: NextPage = () => {
 
   const { state: { darkMode } } = useGlobalContext();
-
+  
   return (
     <>
       <Head>
@@ -16,6 +16,7 @@ const Home: NextPage = () => {
           rel="icon"
           href={darkMode ? '/img/logo-lite.svg' : '/img/logo.svg'}
         />
+        <link rel="manifest" href="manifest.json"></link>
       </Head>
       <CodeEditor />
     </>

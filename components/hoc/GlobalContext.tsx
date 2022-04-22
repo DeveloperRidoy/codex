@@ -1,21 +1,10 @@
-import {
-  ChangeEvent,
-  createContext,
-  FC,
-  useContext,
-  useEffect,
-  useState,
-} from 'react'
+import { createContext, FC, useContext, useEffect, useState } from 'react'
 import {
   EBlock,
   ELayout,
   EDeviceType,
   IContext,
   TState,
-  ICodeBlock,
-  IHtml,
-  ICss,
-  IJs,
 } from '../../utils/types'
 
 const Context = createContext<IContext>({
